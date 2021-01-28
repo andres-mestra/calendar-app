@@ -17,31 +17,36 @@ const events = [{
   end: moment().add(2, 'hours').toDate(),
   bgColor: '#fafafa',
   notes: 'comprar juego',
-  user:{
-    _id:'1234',
-    name:'Andres'
+  user: {
+    _id: '1234',
+    name: 'Andres'
   }
 }]
 
 export const CalendarScreen = () => {
 
+  const [lastView, setLastView] = React.useState(
+    localStorage.getItem('lastView') || 'month'
+  )
+
   const onDoubleClick = (e) => {
     console.log(e)
   }
-  
+
   const onSelectEvent = (e) => {
     console.log(e)
   }
-  
+
   const onViewChange = (e) => {
-    localStorage.setItem('lastView', e );
+    setLastView(e);
+    localStorage.setItem('lastView', e);
   }
-  
-  
+
+
   const eventStyleGetter = (event, start, end, isSelected) => {
-    const style =  {
-      backgroundColor:'#367CF7',
-      borderRadius:'0px',
+    const style = {
+      backgroundColor: '#367CF7',
+      borderRadius: '0px',
       opacity: 0.8,
       display: 'block',
       color: 'white',
@@ -57,16 +62,17 @@ export const CalendarScreen = () => {
       <NavBar />
       <Calendar
         localizer={localizer}
-        events={ events }
+        events={events}
         startAccessor="start"
         endAccessor="end"
-        messages={ messages }
-        eventPropGetter={ eventStyleGetter }
-        onDoubleClickEvent={ onDoubleClick }
-        onSelectEvent={ onSelectEvent }
-        onView={ onViewChange }
+        messages={messages}
+        eventPropGetter={eventStyleGetter}
+        onDoubleClickEvent={onDoubleClick}
+        onSelectEvent={onSelectEvent}
+        onView={onViewChange}
+        view={ lastView }
         components={{
-          event:CalendarEvent
+          event: CalendarEvent
         }}
       />
     </div>
