@@ -6,6 +6,7 @@ import { NavBar } from '../ui/NavBar'
 import { messages } from '../helpers/calendar-message'
 import 'react-big-calendar/lib/css/react-big-calendar.css'
 import 'moment/locale/es'
+import { CalendarEvent } from './CalendarEvent'
 
 moment.locale('es')
 
@@ -15,13 +16,29 @@ const events = [{
   start: moment().toDate(), //New Date()
   end: moment().add(2, 'hours').toDate(),
   bgColor: '#fafafa',
-  notas: ['comprar juego']
+  notes: 'comprar juego',
+  user:{
+    _id:'1234',
+    name:'Andres'
+  }
 }]
 
 export const CalendarScreen = () => {
+
+  const onDoubleClick = (e) => {
+    console.log(e)
+  }
+  
+  const onSelectEvent = (e) => {
+    console.log(e)
+  }
+  
+  const onViewChange = (e) => {
+    localStorage.setItem('lastView', e );
+  }
+  
   
   const eventStyleGetter = (event, start, end, isSelected) => {
-    console.log(event, start, end, isSelected)
     const style =  {
       backgroundColor:'#367CF7',
       borderRadius:'0px',
@@ -45,6 +62,12 @@ export const CalendarScreen = () => {
         endAccessor="end"
         messages={ messages }
         eventPropGetter={ eventStyleGetter }
+        onDoubleClickEvent={ onDoubleClick }
+        onSelectEvent={ onSelectEvent }
+        onView={ onViewChange }
+        components={{
+          event:CalendarEvent
+        }}
       />
     </div>
   )
