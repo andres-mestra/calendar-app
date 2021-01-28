@@ -7,12 +7,13 @@ import './modal.css'
 
 Modal.setAppElement('#root')
 const now = moment().minutes(0).seconds(0).add(1,'hours');
-const nowPlusOne = now.add(1, 'hours').toDate()
+const nowPlusOne = now.clone().add(1, 'hours');
 
 export const CalendarModal = () => {
+  console.log({now, nowPlusOne })
 
   const [dateStart, setdateStart] = React.useState(now.toDate())
-  const [dateEnd, setdateEnd] = React.useState(nowPlusOne)
+  const [dateEnd, setdateEnd] = React.useState(nowPlusOne.toDate())
 
   const closeModal = () => {
 
@@ -55,6 +56,7 @@ export const CalendarModal = () => {
           <DateTimePicker
             onChange={ handleEndDateChange }
             value={dateEnd}
+            minDate={ dateStart }
             className="form-control"
           />
         </div>
