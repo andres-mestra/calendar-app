@@ -11,6 +11,7 @@ import { CalendarEvent } from './CalendarEvent'
 import { CalendarModal } from './CalendarModal'
 import { uiOpenModal } from '../../actions/ui'
 import { eventSetActive } from '../../actions/event'
+import { AddNewFab } from '../ui/AddNewFab'
 
 
 moment.locale('es')
@@ -42,6 +43,7 @@ export const CalendarScreen = () => {
 
   const onSelectEvent = (e) => {
     dispatch(eventSetActive(e))
+    dispatch( uiOpenModal() )
   }
 
   const onViewChange = (e) => {
@@ -83,6 +85,7 @@ export const CalendarScreen = () => {
         }}
       />
 
+      <AddNewFab />
       <CalendarModal />
       
     </div>
