@@ -7,6 +7,7 @@ import Swal from 'sweetalert2';
 import { customStyles } from '../../helpers/centerModal';
 import './modal.css'
 import { uiCloseModal } from '../../actions/ui';
+import { eventAddNew } from '../../actions/event';
 
 
 Modal.setAppElement('#root')
@@ -76,6 +77,14 @@ export const CalendarModal = () => {
     }
 
     //TODO: realizar grabación 
+    dispatch( eventAddNew({
+      ...formValues,
+      id: new Date().getTime(),
+      user: {
+        _id: '1234',
+        name: 'Andres',
+      }
+    }))
 
     setTitleValid(true);
     closeModal()
