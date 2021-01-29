@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Calendar, momentLocalizer } from 'react-big-calendar'
 import moment from 'moment'
 
@@ -17,21 +17,11 @@ import { AddNewFab } from '../ui/AddNewFab'
 moment.locale('es')
 
 const localizer = momentLocalizer(moment)
-const events = [{
-  title: 'Cumpleaños del jefe',
-  start: moment().toDate(), //New Date()
-  end: moment().add(2, 'hours').toDate(),
-  bgColor: '#fafafa',
-  notes: 'comprar juego',
-  user: {
-    _id: '1234',
-    name: 'Andres'
-  }
-}]
 
 export const CalendarScreen = () => {
 
   const dispatch = useDispatch()
+  const { events } = useSelector(state => state.calendar)   
 
   const [lastView, setLastView] = React.useState(
     localStorage.getItem('lastView') || 'month'
