@@ -4,9 +4,9 @@ import Modal from 'react-modal';
 import moment from 'moment'
 import DateTimePicker from 'react-datetime-picker';
 import Swal from 'sweetalert2';
-import { customStyles } from '../helpers/centerModal';
+import { customStyles } from '../../helpers/centerModal';
 import './modal.css'
-import { uiCloseModal } from '../actions/ui';
+import { uiCloseModal } from '../../actions/ui';
 
 
 Modal.setAppElement('#root')

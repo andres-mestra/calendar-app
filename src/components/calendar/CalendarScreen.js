@@ -4,12 +4,13 @@ import { Calendar, momentLocalizer } from 'react-big-calendar'
 import moment from 'moment'
 
 import { NavBar } from '../ui/NavBar'
-import { messages } from '../helpers/calendar-message'
+import { messages } from '../../helpers/calendar-message'
 import 'react-big-calendar/lib/css/react-big-calendar.css'
 import 'moment/locale/es'
 import { CalendarEvent } from './CalendarEvent'
 import { CalendarModal } from './CalendarModal'
-import { uiOpenModal } from '../actions/ui'
+import { uiOpenModal } from '../../actions/ui'
+import { eventSetActive } from '../../actions/event'
 
 
 moment.locale('es')
@@ -40,7 +41,7 @@ export const CalendarScreen = () => {
   }
 
   const onSelectEvent = (e) => {
-    console.log('click')
+    dispatch(eventSetActive(e))
   }
 
   const onViewChange = (e) => {
@@ -83,6 +84,7 @@ export const CalendarScreen = () => {
       />
 
       <CalendarModal />
+      
     </div>
   )
 }
