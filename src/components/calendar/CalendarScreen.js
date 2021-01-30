@@ -10,7 +10,7 @@ import 'moment/locale/es'
 import { CalendarEvent } from './CalendarEvent'
 import { CalendarModal } from './CalendarModal'
 import { uiOpenModal } from '../../actions/ui'
-import { eventSetActive } from '../../actions/event'
+import { eventClearActiveEvent, eventSetActive } from '../../actions/event'
 import { AddNewFab } from '../ui/AddNewFab'
 import { DeleteEventFab } from '../ui/DeleteEventFab'
 
@@ -41,6 +41,14 @@ export const CalendarScreen = () => {
   }
 
 
+  const onSelectSlot = (e) => {
+    //Este metodo recibe la celda donde el usuario hizo click
+    //console.log(e)
+    dispatch( eventClearActiveEvent() )
+  }
+  
+
+
   const eventStyleGetter = (event, start, end, isSelected) => {
     const style = {
       backgroundColor: '#367CF7',
@@ -67,7 +75,9 @@ export const CalendarScreen = () => {
         eventPropGetter={eventStyleGetter}
         onDoubleClickEvent={onDoubleClick}
         onSelectEvent={onSelectEvent}
+        onSelectSlot= { onSelectSlot }
         onView={onViewChange}
+        selectable={ true }
         view={ lastView }
         components={{
           event: CalendarEvent
