@@ -3,7 +3,7 @@ import { types } from '../types/types';
 
 
 const initialState = {
-  events:[{
+  events: [{
     id: new Date().getTime(),
     title: 'Cumpleaños del jefe',
     start: moment().toDate(), //New Date()
@@ -19,7 +19,7 @@ const initialState = {
 }
 
 
-export const calendarReducer = ( state = initialState, action ) => {
+export const calendarReducer = (state = initialState, action) => {
   switch (action?.type) {
 
     case types.eventSetActive:
@@ -31,21 +31,30 @@ export const calendarReducer = ( state = initialState, action ) => {
     case (types.eventAddNew):
       return {
         ...state,
-        events:[ action.payload, ...state.events ]
+        events: [action.payload, ...state.events]
       }
     case (types.eventClearActiveEvent):
       return {
         ...state,
         activeEvent: null
       }
-    
+
     case (types.eventUpdated):
-      return{
+      return {
         ...state,
-        events: state.events.map( e => ( e.id === action?.payload.id ) ? action.payload : e )
+        events: state.events.map(e => (e.id === action?.payload.id) ? action.payload : e)
       }
-  
+
+    case (types.eventDeleted):
+      return {
+        ...state,
+        events: state.events.filter( 
+          e => ( e.id !== state?.activeEvent.id )
+        ),
+        activeEvent: null,
+      }
+
     default:
-      return  state;
+      return state;
   }
 }
