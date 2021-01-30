@@ -7,30 +7,42 @@ import Swal from 'sweetalert2';
 import { customStyles } from '../../helpers/centerModal';
 import './modal.css'
 import { uiCloseModal } from '../../actions/ui';
-import { eventAddNew } from '../../actions/event';
+import { eventAddNew, eventClearActiveEvent } from '../../actions/event';
 
 
 Modal.setAppElement('#root')
 const now = moment().minutes(0).seconds(0).add(1, 'hours');
 const nowPlusOne = now.clone().add(1, 'hours');
 
+const initEvent = {
+  title: '',
+  notes: '',
+  start: now.toDate(),
+  end: nowPlusOne.toDate(),
+}
+
+
 export const CalendarModal = () => {
 
   const dispatch = useDispatch()
   const { modalOpen } = useSelector(state => state.ui)
+  const { activeEvent } = useSelector(state => state.calendar)
+
 
   const [dateStart, setdateStart] = React.useState(now.toDate())
   const [dateEnd, setdateEnd] = React.useState(nowPlusOne.toDate())
   const [titleValid, setTitleValid] = React.useState(true)
 
-  const [formValues, setFormValues] = React.useState({
-    title: 'Evento',
-    notes: '',
-    start: now.toDate(),
-    end: nowPlusOne.toDate(),
-  })
+  const [formValues, setFormValues] = React.useState(initEvent)
 
   const { notes, title, start, end } = formValues;
+
+  React.useEffect(() => {
+    if( activeEvent ){
+      setFormValues(activeEvent)
+    }
+
+  }, [activeEvent, setFormValues])
 
   const handleInputChange = ({ target }) => {
     setFormValues({
@@ -42,6 +54,8 @@ export const CalendarModal = () => {
 
   const closeModal = () => {
     dispatch(uiCloseModal())
+    dispatch(eventClearActiveEvent())
+    setFormValues(initEvent)
   }
 
   const handleStartDateChange = (e) => {
