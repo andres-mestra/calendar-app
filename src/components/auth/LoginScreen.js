@@ -11,17 +11,17 @@ export const LoginScreen = () => {
   const dispatch = useDispatch()
 
   const [formLoginValues, handleLoginInputChange] = useForm({
-    lEmail: 'andres@mail.com',
-    lPassword: '123456',
+    lEmail: '',
+    lPassword: '',
   });
 
   const { lEmail, lPassword } = formLoginValues;
 
   const [formRegisterValues, handleRegisterInputChange] = useForm({
-    rName: 'andres3',
-    rEmail: 'andres3@mail.com',
-    rPassword1: '123456',
-    rPassword2: '123456',
+    rName: '',
+    rEmail: '',
+    rPassword1: '',
+    rPassword2: '',
   });
 
   const {
@@ -60,6 +60,7 @@ export const LoginScreen = () => {
                 type="text"
                 className="form-control"
                 placeholder="Correo"
+                autoComplete="off"
                 name="lEmail"
                 value={lEmail}
                 onChange={handleLoginInputChange}
@@ -70,6 +71,7 @@ export const LoginScreen = () => {
                 type="password"
                 className="form-control"
                 placeholder="Contraseña"
+                autoComplete="off"
                 name="lPassword"
                 value={lPassword}
                 onChange={handleLoginInputChange}
@@ -96,6 +98,7 @@ export const LoginScreen = () => {
                 type="text"
                 className="form-control"
                 placeholder="Nombre"
+                autoComplete="off"
                 name="rName"
                 value={rName}
                 onChange={handleRegisterInputChange}
@@ -106,6 +109,7 @@ export const LoginScreen = () => {
                 type="email"
                 className="form-control"
                 placeholder="Correo"
+                autoComplete="off"
                 name="rEmail"
                 value={rEmail}
                 onChange={handleRegisterInputChange}
@@ -116,6 +120,7 @@ export const LoginScreen = () => {
                 type="password"
                 className="form-control"
                 placeholder="Contraseña"
+                autoComplete="off"
                 name="rPassword1"
                 value={rPassword1}
                 onChange={handleRegisterInputChange}
@@ -127,6 +132,7 @@ export const LoginScreen = () => {
                 type="password"
                 className="form-control"
                 placeholder="Repita la contraseña"
+                autoComplete="off"
                 name="rPassword2"
                 value={rPassword2}
                 onChange={handleRegisterInputChange}
