@@ -7,7 +7,7 @@ import Swal from 'sweetalert2';
 import { customStyles } from '../../helpers/centerModal';
 import './modal.css'
 import { uiCloseModal } from '../../actions/ui';
-import { eventClearActiveEvent, eventStartAddNew, eventUpdated } from '../../actions/event';
+import { eventClearActiveEvent, eventStartAddNew, eventStartUpdate } from '../../actions/event';
 
 
 Modal.setAppElement('#root')
@@ -93,7 +93,7 @@ export const CalendarModal = () => {
     }
 
     if( activeEvent ){
-      dispatch( eventUpdated(formValues) )
+      dispatch( eventStartUpdate(formValues) )
     } else {
       dispatch( eventStartAddNew(formValues) )
 
