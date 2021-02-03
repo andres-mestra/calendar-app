@@ -10,7 +10,7 @@ import 'moment/locale/es'
 import { CalendarEvent } from './CalendarEvent'
 import { CalendarModal } from './CalendarModal'
 import { uiOpenModal } from '../../actions/ui'
-import { eventClearActiveEvent, eventSetActive } from '../../actions/event'
+import { eventClearActiveEvent, eventSetActive, eventStartLoading } from '../../actions/event'
 import { AddNewFab } from '../ui/AddNewFab'
 import { DeleteEventFab } from '../ui/DeleteEventFab'
 
@@ -26,6 +26,11 @@ export const CalendarScreen = () => {
   const [lastView, setLastView] = React.useState(
     localStorage.getItem('lastView') || 'month'
   )
+
+  React.useEffect(() => {
+    dispatch( eventStartLoading() )
+    
+  }, [dispatch])
 
   const onDoubleClick = (e) => {
     dispatch(uiOpenModal())
