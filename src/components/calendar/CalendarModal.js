@@ -9,8 +9,9 @@ import './modal.css'
 import { uiCloseModal } from '../../actions/ui';
 import { eventClearActiveEvent, eventStartAddNew, eventStartUpdate } from '../../actions/event';
 
-
-Modal.setAppElement('#root')
+if ( process.env.NODE_ENV !== 'test'){
+  Modal.setAppElement('#root')
+}
 const now = moment().minutes(0).seconds(0).add(1, 'hours');
 const nowPlusOne = now.clone().add(1, 'hours');
 
